@@ -1,5 +1,6 @@
 import boardsData from '../../helpers/data/boardsData';
 import boardsComponent from '../boards/boards';
+import pins from '../pins/pins';
 import utils from '../../helpers/utils';
 
 const buildBoardContainer = () => {
@@ -13,6 +14,7 @@ const buildBoardContainer = () => {
       });
       domString += '</div>';
       utils.printToDom('boards', domString);
+      $('body').on('click', '.board-card', pins.showPins);
     })
     .catch((err) => console.error(err));
 };
