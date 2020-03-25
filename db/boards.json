@@ -1,0 +1,27 @@
+{
+  "board1": {
+    "name": "Sports",
+    "description": "All things to do with sports.",
+    "uid": "lO33f6iB5egjuU2IGId9w8CZzhE2"
+  },
+  "board2": {
+    "name": "Clothing",
+    "description": "This seasons new clothing fashion.",
+    "uid": "12345"
+  },
+  "board3": {
+    "name": "Technology",
+    "description": "This board is all about technology.",
+    "uid": "lO33f6iB5egjuU2IGId9w8CZzhE2"
+  },
+  "board4": {
+    "name": "Games",
+    "description": "This board is all about games.",
+    "uid": "lO33f6iB5egjuU2IGId9w8CZzhE2"
+  },
+  "board5": {
+    "name": "Health",
+    "description": "This board is all about health related topics.",
+    "uid": "67890"
+  }
+}
