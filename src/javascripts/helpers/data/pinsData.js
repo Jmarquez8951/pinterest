@@ -17,4 +17,6 @@ const getPins = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+// make getPinsById function here
+
 export default { getPins };

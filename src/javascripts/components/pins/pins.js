@@ -2,6 +2,16 @@ import pinsData from '../../helpers/data/pinsData';
 import utils from '../../helpers/utils';
 import './pins.scss';
 
+const showBoard = () => {
+  $('#boards').removeClass('hide');
+  $('#selected-board').addClass('hide');
+};
+
+const pinEvents = () => {
+  $('#boards').addClass('hide');
+  $('#back-btn').on('click', showBoard);
+};
+
 const showPins = (e) => {
   const boardId = e.target.closest('.card').id;
   pinsData.getPins()
@@ -19,7 +29,8 @@ const showPins = (e) => {
       });
       domString += '</div>';
       utils.printToDom('selected-board', domString);
-      $('#boards').addClass('hide');
+      $('#selected-board').removeClass('hide');
+      pinEvents();
     })
     .catch((err) => console.error('Pins data didn\'t load right', err));
 
