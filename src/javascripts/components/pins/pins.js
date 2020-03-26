@@ -1,6 +1,5 @@
 import pinsData from '../../helpers/data/pinsData';
 import utils from '../../helpers/utils';
-import './pins.scss';
 
 const showBoard = () => {
   $('#boards').removeClass('hide');
