@@ -3,6 +3,11 @@ import boardsComponent from '../boards/boards';
 import pins from '../pins/pins';
 import utils from '../../helpers/utils';
 
+const selectedBoard = (e) => {
+  const boardId = e.target.closest('.card').id;
+  pins.showPins(boardId);
+};
+
 const buildBoardContainer = () => {
   boardsData.getUserBoardsByUid()
     .then((boards) => {
@@ -14,7 +19,7 @@ const buildBoardContainer = () => {
       });
       domString += '</div>';
       utils.printToDom('boards', domString);
-      $('body').on('click', '.board-card', pins.showPins);
+      $('body').on('click', '.board-card', selectedBoard);
     })
     .catch((err) => console.error(err));
 };
