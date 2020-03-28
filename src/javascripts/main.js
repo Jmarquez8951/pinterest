@@ -15,8 +15,8 @@ const init = () => {
   auth.loginButton();
   myNavbar.logoutEvent();
   home.loadHome();
-  $('body').on('mouseenter', '.board-card', (e) => e.target.closest('.card').classList.add('bg-danger'));
-  $('body').on('mouseleave', '.board-card', (e) => e.target.closest('.card').classList.remove('bg-danger'));
+  $('body').on('mouseenter', '.board-card', (e) => e.target.closest('.card').classList.add('bg-warning'));
+  $('body').on('mouseleave', '.board-card', (e) => e.target.closest('.card').classList.remove('bg-warning'));
 };
 
 init();

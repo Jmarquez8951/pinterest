@@ -12,7 +12,6 @@ const buildBoardContainer = () => {
       boards.forEach((board) => {
         domString += boardsComponent.buildBoards(board);
       });
-      domString += '<button id="test">Test</button>';
       domString += '</div>';
       utils.printToDom('boards', domString);
       $('body').on('click', '.board-card', pins.showPins);
