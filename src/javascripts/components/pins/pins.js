@@ -20,8 +20,9 @@ const showPins = (e) => {
       domString += '<div class="p-3"><button id="back-btn" class="btn btn-dark">Back</button></div>';
       domString += '<div class="d-flex flex-wrap justify-content-center">';
       pins.forEach((pin) => {
-        domString += '<div class="col-5 m-0 p-1">';
-        domString += `<img src="${pin.imageUrl}" class="img-thumbnail pin">`;
+        domString += '<div class="card d-flex col-5 m-3 p-1">';
+        domString += `<img src="${pin.imageUrl}" class="img-thumbnail bg-dark pin">`;
+        domString += '<div class="row m-1"><button class="btn btn-danger col delete-pin"><i class="fas fa-trash delete-pin"></i></button></div>';
         domString += '</div>';
       });
       domString += '</div>';
