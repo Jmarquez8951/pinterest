@@ -7,14 +7,16 @@ import myNavbar from './components/myNavbar/myNavbar';
 
 import '../styles/main.scss';
 import 'bootstrap';
+import home from './components/home/home';
 
 const init = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   authData.checkLoginStatus();
   auth.loginButton();
   myNavbar.logoutEvent();
-  $('body').on('mouseenter', '.board-card', (e) => e.target.closest('.card').classList.add('bg-success'));
-  $('body').on('mouseleave', '.board-card', (e) => e.target.closest('.card').classList.remove('bg-success'));
+  home.loadHome();
+  $('body').on('mouseenter', '.board-card', (e) => e.target.closest('.card').classList.add('bg-danger'));
+  $('body').on('mouseleave', '.board-card', (e) => e.target.closest('.card').classList.remove('bg-danger'));
 };
 
 init();

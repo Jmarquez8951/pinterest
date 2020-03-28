@@ -4,7 +4,7 @@ import pins from '../pins/pins';
 import utils from '../../helpers/utils';
 
 const buildBoardContainer = () => {
-  boardsData.getBoards()
+  boardsData.getUserBoardsByUid()
     .then((boards) => {
       let domString = '';
       domString += '<h2 class="text-center">Boards</h2>';
@@ -12,6 +12,7 @@ const buildBoardContainer = () => {
       boards.forEach((board) => {
         domString += boardsComponent.buildBoards(board);
       });
+      domString += '<button id="test">Test</button>';
       domString += '</div>';
       utils.printToDom('boards', domString);
       $('body').on('click', '.board-card', pins.showPins);

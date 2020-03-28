@@ -1,6 +1,5 @@
 import pinsData from '../../helpers/data/pinsData';
 import utils from '../../helpers/utils';
-import './pins.scss';
 
 const showBoard = () => {
   $('#boards').removeClass('hide');
@@ -21,7 +20,7 @@ const showPins = (e) => {
       domString += '<div class="p-3"><button id="back-btn" class="btn btn-dark">Back</button></div>';
       domString += '<div class="d-flex flex-wrap justify-content-center">';
       pins.forEach((pin) => {
-        domString += '<div class="col-3 m-0 p-1">';
+        domString += '<div class="col-5 m-0 p-1">';
         domString += `<img src="${pin.imageUrl}" class="img-thumbnail pin">`;
         domString += '</div>';
       });
