@@ -5,7 +5,7 @@ import pinsComponent from '../pins/pins';
 import pinsData from '../../helpers/data/pinsData';
 
 const removeBoard = (e) => {
-  const boardId = e.target.closest('.card').id;
+  const boardId = e.target.closest('.removed-board').id;
   boardsData.deleteBoard(boardId)
     .then(() => {
       pinsData.getPinsByBoardId(boardId)
@@ -13,13 +13,11 @@ const removeBoard = (e) => {
           const pins = response;
           pins.forEach((pin) => {
             const pinId = pin.id;
-            pinsData.deletePin(pinId)
-              .then(() => {
-                // eslint-disable-next-line no-use-before-define
-                buildBoardContainer();
-              });
+            pinsData.deletePin(pinId);
           });
         });
+      // eslint-disable-next-line no-use-before-define
+      buildBoardContainer();
     })
     .catch((err) => console.error('Error removing board.', err));
 };
