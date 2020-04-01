@@ -15,7 +15,7 @@ const checkLoginStatus = () => {
       homeDiv.addClass('hide');
       boardsDiv.removeClass('hide');
       logoutBtn.removeClass('hide');
-      selectedBoard.removeClass('hide');
+      selectedBoard.addClass('hide');
       boardsContianer.buildBoardContainer();
     } else {
       authDiv.removeClass('hide');
