@@ -27,7 +27,9 @@ const showPins = (boardId) => {
     .then((response) => {
       const pins = response;
       let domString = '';
-      domString += '<div class="p-3"><button id="back-btn" class="btn btn-dark">Back</button></div>';
+      domString += '<div class="d-flex justify-content-between"><div class="p-3"><button id="back-btn" class="btn btn-dark"><i class="fas fa-arrow-circle-left"></i> Back</button></div>';
+      domString += '<div class="p-3 align-self-end">';
+      domString += `<button type="button" id="new-pin" class="btn btn-primary ${boardId}" data-toggle="modal" data-target="#newObjectModal"><i class="fas fa-plus"></i> New Pin</button></div></div>`;
       domString += '<div class="d-flex flex-wrap justify-content-center">';
       pins.forEach((pin) => {
         domString += `<div class="card col-4 m-3 p-1" id="${pin.id}">`;
