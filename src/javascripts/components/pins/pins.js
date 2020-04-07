@@ -1,4 +1,5 @@
 import pinsData from '../../helpers/data/pinsData';
+import createNewObject from '../createNewObject/createNewObject';
 import utils from '../../helpers/utils';
 
 const removePin = (e) => {
@@ -20,6 +21,7 @@ const showBoard = () => {
 const pinEvents = () => {
   $('#boards').addClass('hide');
   $('#back-btn').on('click', showBoard);
+  $('#new-pin').on('click', createNewObject.newObject);
 };
 
 const showPins = (boardId) => {
