@@ -19,6 +19,7 @@ const checkLoginStatus = () => {
       selectedBoard.addClass('hide');
       boardsContianer.buildBoardContainer();
       pins.newPinEvent();
+      pins.pinEvents();
     } else {
       authDiv.removeClass('hide');
       homeDiv.removeClass('hide');

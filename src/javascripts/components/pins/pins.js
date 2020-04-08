@@ -23,7 +23,6 @@ const createNewPin = (e) => {
     .then(() => {
       // eslint-disable-next-line no-use-before-define
       showPins(currentBoardId);
-      $('#inputImgURL').val('');
       utils.printToDom('selected-board', '');
     })
     .catch((err) => console.error('Could not add pin', err));
@@ -32,7 +31,11 @@ const createNewPin = (e) => {
 const newPinEvent = () => {
   $('#newObjectModalLabel').html('<h2>New Pin</h2>');
   $('#newObjectBody').html('<div class="form-group"><label for="inputImgURL">New Pin Url</label><input type="text" class="form-control" id="inputImgURL" placeholder="Enter Image Url"></div>');
-  $('body').on('click', '#save-btn', createNewPin);
+  let domString = '';
+  domString += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+  domString += '<button id="save-btn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
+  $('.modal-footer').html(domString);
+  $('#save-btn').on('click', createNewPin);
 };
 
 const showBoard = () => {
@@ -67,8 +70,9 @@ const showPins = (boardId) => {
       $('body').on('click', '.delete-pin', removePin);
       $('#selected-board').removeClass('hide');
       $('#boards').addClass('hide');
+      pinEvents();
     })
     .catch((err) => console.error('Pins data didn\'t load right', err));
 };
 
-export default { showPins, newPinEvent, pinEvents };
+export default { showPins, pinEvents, newPinEvent };
