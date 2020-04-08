@@ -23,6 +23,7 @@ const createNewPin = (e) => {
     .then(() => {
       // eslint-disable-next-line no-use-before-define
       showPins(currentBoardId);
+      $('#inputImgURL').val('');
       utils.printToDom('selected-board', '');
     })
     .catch((err) => console.error('Could not add pin', err));
