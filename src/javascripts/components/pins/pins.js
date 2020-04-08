@@ -12,14 +12,37 @@ const removePin = (e) => {
     .catch((err) => console.error('Could not remove pin', err));
 };
 
+const createNewPin = (e) => {
+  e.preventDefault();
+  const currentBoardId = $('#new-pin').attr('class').toString().split(' ')[2];
+  const newPin = {
+    imageUrl: $('#inputImgURL').val(),
+    boardId: currentBoardId,
+  };
+  pinsData.addPin(newPin)
+    .then(() => {
+      // eslint-disable-next-line no-use-before-define
+      showPins(currentBoardId);
+      $('#inputImgURL').val('');
+      utils.printToDom('selected-board', '');
+    })
+    .catch((err) => console.error('Could not add pin', err));
+};
+
+const newPinEvent = () => {
+  $('#newObjectModalLabel').html('<h2>New Pin</h2>');
+  $('#newObjectBody').html('<div class="form-group"><label for="inputImgURL">New Pin Url</label><input type="text" class="form-control" id="inputImgURL" placeholder="Enter Image Url"></div>');
+  $('body').on('click', '#save-btn', createNewPin);
+};
+
 const showBoard = () => {
   $('#boards').removeClass('hide');
   $('#selected-board').addClass('hide');
 };
 
 const pinEvents = () => {
-  $('#boards').addClass('hide');
   $('#back-btn').on('click', showBoard);
+  $('#new-pin').on('click', newPinEvent);
 };
 
 const showPins = (boardId) => {
@@ -27,7 +50,9 @@ const showPins = (boardId) => {
     .then((response) => {
       const pins = response;
       let domString = '';
-      domString += '<div class="p-3"><button id="back-btn" class="btn btn-dark">Back</button></div>';
+      domString += '<div class="d-flex justify-content-between"><div class="p-3"><button id="back-btn" class="btn btn-dark"><i class="fas fa-arrow-circle-left"></i> Back</button></div>';
+      domString += '<div class="p-3 align-self-end">';
+      domString += `<button type="button" id="new-pin" class="btn btn-primary ${boardId}" data-toggle="modal" data-target="#newObjectModal"><i class="fas fa-plus"></i> New Pin</button></div></div>`;
       domString += '<div class="d-flex flex-wrap justify-content-center">';
       pins.forEach((pin) => {
         domString += `<div class="card col-4 m-3 p-1" id="${pin.id}">`;
@@ -41,9 +66,9 @@ const showPins = (boardId) => {
       utils.printToDom('selected-board', domString);
       $('body').on('click', '.delete-pin', removePin);
       $('#selected-board').removeClass('hide');
-      pinEvents();
+      $('#boards').addClass('hide');
     })
     .catch((err) => console.error('Pins data didn\'t load right', err));
 };
 
-export default { showPins };
+export default { showPins, newPinEvent, pinEvents };

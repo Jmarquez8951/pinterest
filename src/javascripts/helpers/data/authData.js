@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import boardsContianer from '../../components/boardsContainer/boardsContainer';
+import pins from '../../components/pins/pins';
 
 const authDiv = $('#auth');
 const homeDiv = $('#home');
@@ -17,6 +18,7 @@ const checkLoginStatus = () => {
       logoutBtn.removeClass('hide');
       selectedBoard.addClass('hide');
       boardsContianer.buildBoardContainer();
+      pins.newPinEvent();
     } else {
       authDiv.removeClass('hide');
       homeDiv.removeClass('hide');
