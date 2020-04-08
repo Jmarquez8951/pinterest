@@ -21,7 +21,7 @@ const showBoard = () => {
 const pinEvents = () => {
   $('#boards').addClass('hide');
   $('#back-btn').on('click', showBoard);
-  $('#new-pin').on('click', createNewObject.newObject);
+  $('#new-pin').on('click', createNewObject.events);
 };
 
 const showPins = (boardId) => {
