@@ -26,6 +26,7 @@ const createNewBoard = () => {
   const newBoard = {
     description: $('#inputDescription').val(),
     name: $('#inputBoardName').val(),
+    uid: boardsData.getCurrentUser(),
   };
   console.error('newBoard', newBoard);
 };
