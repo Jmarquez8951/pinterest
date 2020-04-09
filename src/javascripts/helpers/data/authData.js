@@ -18,6 +18,7 @@ const checkLoginStatus = () => {
       logoutBtn.removeClass('hide');
       selectedBoard.addClass('hide');
       boardsContianer.buildBoardContainer();
+      boardsContianer.events();
       pins.newPinEvent();
       pins.pinEvents();
     } else {

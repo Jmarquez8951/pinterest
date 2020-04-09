@@ -28,7 +28,13 @@ const createNewBoard = () => {
     name: $('#inputBoardName').val(),
     uid: boardsData.getCurrentUser(),
   };
-  console.error('newBoard', newBoard);
+  boardsData.addBoard(newBoard)
+    .then(() => {
+      // eslint-disable-next-line no-use-before-define
+      buildBoardContainer();
+      utils.printToDom('boards', '');
+    })
+    .catch((err) => console.error('Could not add board', err));
 };
 
 const newBoardEvent = () => {
@@ -53,6 +59,10 @@ const selectedBoard = (e) => {
   pinsComponent.showPins(boardId);
 };
 
+const events = () => {
+  $('body').on('click', '#add-board', newBoardEvent);
+};
+
 const buildBoardContainer = () => {
   boardsData.getUserBoardsByUid()
     .then((boards) => {
@@ -69,9 +79,8 @@ const buildBoardContainer = () => {
       utils.printToDom('boards', domString);
       $('body').on('click', '.board-card', selectedBoard);
       $('body').on('click', '.delete-board', removeBoard);
-      $('body').on('click', '#add-board', newBoardEvent);
     })
     .catch((err) => console.error(err));
 };
 
-export default { buildBoardContainer };
+export default { buildBoardContainer, events };
