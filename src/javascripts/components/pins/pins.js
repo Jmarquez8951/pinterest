@@ -38,6 +38,21 @@ const newPinEvent = () => {
   $('#save-btn').on('click', createNewPin);
 };
 
+const editPinEvent = () => {
+  $('#newObjectModalLabel').html('<h2>Edit Pin</h2>');
+  let domString = '';
+  domString += '<div class="form-check">';
+  domString += '<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">';
+  domString += '<label class="form-check-label" for="exampleRadios1">testing</label>';
+  domString += '</div>';
+  $('#newObjectBody').html(domString);
+  domString = '';
+  domString += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+  domString += '<button id="edit-save-btn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
+  $('.modal-footer').html(domString);
+  console.error('in edit pin event');
+};
+
 const showBoard = () => {
   $('#boards').removeClass('hide');
   $('#selected-board').addClass('hide');
@@ -62,12 +77,14 @@ const showPins = (boardId) => {
         domString += `<div class="board-id" id="${pin.boardId}">`;
         domString += `<img src="${pin.imageUrl}" class="img-thumbnail bg-dark pin">`;
         domString += '<div class="row m-1"><button class="btn btn-danger col delete-pin"><i class="fas fa-trash"></i></button></div>';
+        domString += '<div class="row m-1"><button class="btn btn-warning col edit-pin" data-toggle="modal" data-target="#newObjectModal"><i class="fas fa-pencil-alt"></i></button></div>';
         domString += '</div>';
         domString += '</div>';
       });
       domString += '</div>';
       utils.printToDom('selected-board', domString);
       $('body').on('click', '.delete-pin', removePin);
+      $('body').on('click', '.edit-pin', editPinEvent);
       $('#selected-board').removeClass('hide');
       $('#boards').addClass('hide');
       pinEvents();
