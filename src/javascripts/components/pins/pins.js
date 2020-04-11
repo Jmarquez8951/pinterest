@@ -1,5 +1,6 @@
 import pinsData from '../../helpers/data/pinsData';
 import utils from '../../helpers/utils';
+import boardsData from '../../helpers/data/boardsData';
 
 const removePin = (e) => {
   const pinId = e.target.closest('.card').id;
@@ -38,19 +39,36 @@ const newPinEvent = () => {
   $('#save-btn').on('click', createNewPin);
 };
 
-const editPinEvent = () => {
-  $('#newObjectModalLabel').html('<h2>Edit Pin</h2>');
-  let domString = '';
-  domString += '<div class="form-check">';
-  domString += '<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">';
-  domString += '<label class="form-check-label" for="exampleRadios1">testing</label>';
-  domString += '</div>';
-  $('#newObjectBody').html(domString);
-  domString = '';
-  domString += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-  domString += '<button id="edit-save-btn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
-  $('.modal-footer').html(domString);
-  console.error('in edit pin event');
+const createEditPin = (e) => {
+  e.preventDefault();
+  const boardSelected = $('input:radio[name=options]:checked').val();
+  console.error('boardSelected', boardSelected);
+};
+
+const editPinEvent = (e) => {
+  const selectedPin = e.target.closest('.card').id;
+  console.error(selectedPin);
+  boardsData.getUserBoardsByUid()
+    .then((response) => {
+      const boards = response;
+      $('#newObjectModalLabel').html('<h2>Edit Pin</h2>');
+      let domString = '';
+      domString += '<form id="boardForm">';
+      boards.forEach((board) => {
+        domString += '<div class="form-check">';
+        domString += `<input class="form-check-input" type="radio" name="options" id="${board.id}" value="${board.id}">`;
+        domString += `<label class="form-check-label" for="${board.id}">${board.name}</label>`;
+        domString += '</div>';
+      });
+      domString += '</form>';
+      $('#newObjectBody').html(domString);
+      domString = '';
+      domString += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+      domString += '<button id="edit-save-btn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
+      $('.modal-footer').html(domString);
+      $('#edit-save-btn').on('click', createEditPin);
+    })
+    .catch((err) => console.error('Could not get boards', err));
 };
 
 const showBoard = () => {
