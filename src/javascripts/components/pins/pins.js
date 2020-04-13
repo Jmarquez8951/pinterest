@@ -42,12 +42,19 @@ const newPinEvent = () => {
 const createEditPin = (e) => {
   e.preventDefault();
   const boardSelected = $('input:radio[name=options]:checked').val();
-  console.error('boardSelected', boardSelected);
+  const selectedPinId = e.target.dataset.pinId;
+  const boardOn = $('.img-thumbnail').first().closest('.board-id')[0].id;
+  pinsData.updatePin(selectedPinId, boardSelected)
+    .then(() => {
+      // eslint-disable-next-line no-use-before-define
+      showPins(boardOn);
+      utils.printToDom('selected-board', '');
+    })
+    .catch((err) => console.error('Could not update pins board', err));
 };
 
 const editPinEvent = (e) => {
   const selectedPin = e.target.closest('.card').id;
-  console.error(selectedPin);
   boardsData.getUserBoardsByUid()
     .then((response) => {
       const boards = response;
@@ -64,7 +71,7 @@ const editPinEvent = (e) => {
       $('#newObjectBody').html(domString);
       domString = '';
       domString += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-      domString += '<button id="edit-save-btn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
+      domString += `<button id="edit-save-btn" type="button" class="btn btn-primary" data-dismiss="modal" data-pin-id="${selectedPin}">Save changes</button>`;
       $('.modal-footer').html(domString);
       $('#edit-save-btn').on('click', createEditPin);
     })
