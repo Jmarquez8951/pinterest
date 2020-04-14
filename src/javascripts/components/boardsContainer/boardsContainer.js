@@ -51,7 +51,6 @@ const newBoardEvent = () => {
   domString += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
   domString += '<button id="board-save-btn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
   $('.modal-footer').html(domString);
-  $('body').on('click', '#board-save-btn', createNewBoard);
 };
 
 const selectedBoard = (e) => {
@@ -61,6 +60,9 @@ const selectedBoard = (e) => {
 
 const events = () => {
   $('body').on('click', '#add-board', newBoardEvent);
+  $('body').on('click', '.board-card', selectedBoard);
+  $('body').on('click', '.delete-board', removeBoard);
+  $('body').on('click', '#board-save-btn', createNewBoard);
 };
 
 const buildBoardContainer = () => {
@@ -77,8 +79,6 @@ const buildBoardContainer = () => {
       });
       domString += '</div>';
       utils.printToDom('boards', domString);
-      $('body').on('click', '.board-card', selectedBoard);
-      $('body').on('click', '.delete-board', removeBoard);
     })
     .catch((err) => console.error(err));
 };
